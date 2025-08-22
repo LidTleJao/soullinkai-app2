@@ -6,7 +6,7 @@ const CardHero = () => {
       >
         <div className="hero-content text-center flex-col">
           <div className="max-w-max space-y-4 mt-16">
-            <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold">
+            <h1 className="text-4xl sm:text-6xl lg:text-9xl font-bold font-[family-name:var(--font-el-messiri)]">
               S O U L L I N K
             </h1>
             <div className="divider divider-white"></div>

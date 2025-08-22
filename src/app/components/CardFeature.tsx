@@ -1,7 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 const CardFeature = () => {
   return (
     <>
-      <div className="hero min-h-screen no-caret bg-[url('/Image/heroBottom.jpg')] bg-cover bg-center">
+      <div className="hero min-h-screen no-caret bg-[url('/Image/heroBottom.jpg')] bg-cover bg-center font-[family-name:var(--font-el-messiri)]">
         <div className="hero-content text-center flex-col">
           <div className="max-w-md space-y-4">
             <h2 className="text-4xl ">About Us</h2>
@@ -14,11 +15,11 @@ const CardFeature = () => {
               history in detail.
             </p>
           </div>
-          <div className="flex flex-col md:flex-row space-x-6">
+          <div className="flex flex-col md:flex-row space-x-12">
             <div className="max-w-md mt-16">
               <div className="card-body flex-col items-center rounded-2xl border-2">
                 <div className="card card-body text-base sm:text-xl md:text-2xl items-center">
-                  <div className="max-w-1/3">
+                  <div className="max-w-1/3 bg-white rounded-2xl flex items-center justify-center">
                     <figure>
                       <img src="/Image/leaf.png" alt="image leaf" />
                     </figure>
@@ -36,9 +37,9 @@ const CardFeature = () => {
             <div className="max-w-md mt-16">
               <div className="card-body flex-col items-center rounded-2xl border-2">
                 <div className="card card-body text-base sm:text-xl md:text-2xl items-center">
-                  <div className="max-w-1/3">
+                  <div className="max-w-1/3 bg-white rounded-2xl flex items-center justify-center">
                     <figure>
-                      <img src="/Image/shield.png" alt="image shield" />
+                      <img src="/Image/security.png" alt="image security" />
                     </figure>
                   </div>
                   <p className="text-base sm:text-xl md:text-2xl max-w-3xl mx-auto ">
@@ -53,9 +54,9 @@ const CardFeature = () => {
             <div className="max-w-md mt-16">
               <div className="card-body flex-col items-center rounded-2xl border-2">
                 <div className="card card-body text-base sm:text-xl md:text-2xl items-center">
-                  <div className="max-w-1/3">
+                  <div className="max-w-1/3 bg-white rounded-2xl flex items-center justify-center">
                     <figure>
-                      <img src="/Image/target.png" alt="image target" />
+                      <img src="/Image/target.png" alt="image target"  />
                     </figure>
                   </div>
                   <p className="text-base sm:text-xl md:text-2xl max-w-3xl mx-auto">
