@@ -1,0 +1,23 @@
+const CardOur = () => {
+  return (
+    <>
+      <div className="hero min-h-screen no-caret bg-[url('/Image/our.jpg')] bg-cover bg-center font-[family-name:var(--font-el-messiri)] p-0 lg:p-20">
+        <div className="flex items-center justify-end w-full h-full">
+          <div className="max-w-2xl space-y-4">
+            <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+              Our Story
+            </h3>
+            <p className="text-base sm:text-xl md:text-2xl">
+              Soul Link was born out of a passion for storytelling and character
+              creation. Our team of writers, developers, and AI enthusiasts
+              wanted to create a platform that would empower creators to bring
+              their characters to life in a more structured and meaningful way.
+            </p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default CardOur;

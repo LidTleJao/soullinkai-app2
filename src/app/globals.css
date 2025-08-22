@@ -1,6 +1,7 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
-:root {
+@root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -24,3 +25,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.no-caret {
+  caret-color: transparent; /* ซ่อน caret */
+}
+
+.divider-white {
+    &:before, &:after {
+        background-color: #ededed /* var(--color-accent) */;
+    }
+}
+
