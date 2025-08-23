@@ -13,8 +13,8 @@ const CardPersonaCreate = () => {
   const submit = async () => {
     if (!name) return alert("Name required");
     const created = await createPersona({ name, description: desc });
-    alert("Persona created");
-    router.push(`/persona/${created.id}`);
+    // alert("Persona created");
+    router.push(`/Persona/${created.id}`);
   };
 
   return (

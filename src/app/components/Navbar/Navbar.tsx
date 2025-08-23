@@ -15,7 +15,9 @@ const Navbar = () => {
       >
         <div className="flex px-4 items-center justify-between w-full">
           <div className="flex-1">
-            <p className=" text-xl font-[family-name:var(--font-el-messiri)]">S o u l L i n k A I</p>
+            <p className=" text-xl font-[family-name:var(--font-el-messiri)]">
+              E v e r L i n k A I
+            </p>
           </div>
           <div>
             <button
@@ -62,10 +64,10 @@ const Navbar = () => {
                   </a>
                   <a
                     onClick={() => {
-                      logout();
                       router.push("/Login");
+                      logout();
                     }}
-                    className="bg-red-500 px-3 py-1 rounded"
+                    className="btn btn-ghost hover:bg-red-500"
                   >
                     Logout
                   </a>
@@ -114,38 +116,59 @@ const Navbar = () => {
           </svg>
         </button>
         <div className="flex flex-col space-y-4 ">
-          <a href={"/"} className="btn btn-ghost border-2 border-base-100 rounded-2xl">
+          <a
+            href={"/"}
+            className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+          >
             Home
           </a>
           {isLoggedIn() ? (
             <>
-              <a href={"/personas"} className="btn btn-ghost border-2 border-base-100 rounded-2xl">
+              <a
+                href={"/personas"}
+                className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+              >
                 Dashboard
               </a>
-              <a href={"/subscription"} className="btn btn-ghost border-2 border-base-100 rounded-2xl">
+              <a
+                href={"/subscription"}
+                className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+              >
                 Subscription
               </a>
-              <a href={"/feedback"} className="btn btn-ghost border-2 border-base-100 rounded-2xl">
+              <a
+                href={"/feedback"}
+                className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+              >
                 Feedback
               </a>
-              <a href={"/security"} className="btn btn-ghost border-2 border-base-100 rounded-2xl">
+              <a
+                href={"/security"}
+                className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+              >
                 Security
               </a>
-              <a href={"/privacy"} className="btn btn-ghost border-2 border-base-100 rounded-2xl">
+              <a
+                href={"/privacy"}
+                className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+              >
                 Privacy
               </a>
               <a
                 onClick={() => {
-                  logout();
                   router.push("/Login");
+                  logout();
                 }}
-                className="bg-red-500 px-3 py-1 rounded-2xl border-2"
+                className="btn btn-ghost hover:bg-red-500 border-2 rounded-2xl"
               >
                 Logout
               </a>
             </>
           ) : (
-            <a href={"/Login"} className="btn btn-ghost border-2 border-base-100 rounded-2xl">
+            <a
+              href={"/Login"}
+              className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+            >
               Login
             </a>
           )}

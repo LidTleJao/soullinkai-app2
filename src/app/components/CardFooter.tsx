@@ -10,7 +10,7 @@ const CardFooter = () => {
             <div className="divider divider-white"></div>
           </div>
           <p className="text-base sm:text-xl md:text-2xl max-w-3xl mx-auto mt-8">
-            Soul Link is an online platform that makes it easy and secure to
+            Ever Link is an online platform that makes it easy and secure to
             create, store, and manage character data. Simply paste your
             conversation text, and our AI Summarizer will process it into a
             clean, well-structured JSON file. With our Personality Extractor,

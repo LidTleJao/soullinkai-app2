@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -13,15 +12,11 @@ const CardRegister = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ ฟังก์ชันเช็ค email format
-  const isValidEmail = (value: string) => {
-    return /\S+@\S+\.\S+/.test(value);
-  };
+  const isValidEmail = (value: string) => /\S+@\S+\.\S+/.test(value);
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
 
-    // ✅ validation frontend ก่อนส่งไป backend
     if (!isValidEmail(email)) {
       toast.error("กรุณากรอกอีเมลให้ถูกต้อง", { position: "top-right" });
       return;
@@ -35,16 +30,14 @@ const CardRegister = () => {
 
     try {
       setLoading(true);
-
       await register(email, password);
 
-      toast.success("สมัครสมาชิกสำเร็จ ", {
+      toast.success("สมัครสมาชิกสำเร็จ 🎉", {
         position: "top-right",
         autoClose: 3000,
       });
 
-      // ✅ ไปหน้า verify (คุณสร้างไว้แล้ว)
-      router.push("/verify");
+      router.push("/Verify");
     } catch (err) {
       toast.error(`สมัครสมาชิกไม่สำเร็จ`, {
         position: "top-right",
@@ -91,7 +84,7 @@ const CardRegister = () => {
               <label className="input validator bg-neutral-900">
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   aria-label="input password"
@@ -101,11 +94,11 @@ const CardRegister = () => {
               </label>
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-2 rounded text-white ${
+              className={`w-full py-2 rounded ${
                 loading
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-indigo-600 hover:bg-indigo-700"

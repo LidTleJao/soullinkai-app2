@@ -8,7 +8,7 @@ const CardOur = () => {
               Our Story
             </h3>
             <p className="text-base sm:text-xl md:text-2xl">
-              Soul Link was born out of a passion for storytelling and character
+              Ever Link was born out of a passion for storytelling and character
               creation. Our team of writers, developers, and AI enthusiasts
               wanted to create a platform that would empower creators to bring
               their characters to life in a more structured and meaningful way.

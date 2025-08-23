@@ -7,7 +7,7 @@ const CardFeature = () => {
           <div className="max-w-md space-y-4">
             <h2 className="text-4xl ">About Us</h2>
             <p className="text-base sm:text-xl md:text-2xl max-w-3xl mx-auto">
-              Soul Link is an online platform that makes it easy and secure to
+              Ever Link is an online platform that makes it easy and secure to
               create, store, and manage character data. Simply paste your
               conversation text, and our AI Summarizer will process it into a
               clean, well-structured JSON file. With our Personality Extractor,
@@ -25,7 +25,7 @@ const CardFeature = () => {
                     </figure>
                   </div>
                   <p className="text-base sm:text-xl md:text-2xl max-w-3xl mx-auto">
-                    Soul Link is an online platform that makes it easy and
+                    Ever Link is an online platform that makes it easy and
                     secure to create, store, and manage character data. You can
                     organize your conversations, transform them into structured
                     JSON files, and keep your projects consistent across
@@ -60,7 +60,7 @@ const CardFeature = () => {
                     </figure>
                   </div>
                   <p className="text-base sm:text-xl md:text-2xl max-w-3xl mx-auto">
-                    Soul Link is designed to be intuitive and secure, ensuring
+                    Ever Link is designed to be intuitive and secure, ensuring
                     your character data is always safe and accessible. Whether
                     you`re a writer, game developer, or worldbuilder, our
                     platform gives you reliable tools to create and manage your

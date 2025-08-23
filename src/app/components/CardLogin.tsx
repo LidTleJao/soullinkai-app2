@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "../services/authService";
 import GoogleSigninButton from "./GoogleSigninButton";
+import { toast } from "react-toastify";
 
 const CardLogin = () => {
   const router = useRouter();
@@ -14,17 +15,32 @@ const CardLogin = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      router.push("/verify");
+      toast.success("เข้าสู่ระบบสำเร็จ 🎉", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      router.push("/Verify");
     } catch (err: unknown) {
-    if (err instanceof Error) {
-      alert(err.message);
-    } else {
-      alert("Something went wrong");
+      if (err) {
+        // alert(err.message);
+        toast.error(`เข้าสู่ระบบไม่สำเร็จ`, {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.error("Login failed:", err);
+      } else {
+        // alert("Something went wrong");
+        toast.error(`Something went wrong`, {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.error("Login failed:", err);
+      }
     }
   }
-  }
 
-  const onSuccess = () => router.push("/verify");
+  const onSuccess = () => router.push("/Verify");
 
   return (
     <>
@@ -42,7 +58,7 @@ const CardLogin = () => {
                 <label className="label no-caret">
                   <span className="text-lg ">Email</span>
                 </label>
-                <label className="input validator text-base-content">
+                <label className="input validator bg-neutral-900">
                   <svg
                     className="h-[1em] opacity-50"
                     xmlns="http://www.w3.org/2000/svg"
@@ -60,11 +76,11 @@ const CardLogin = () => {
                     </g>
                   </svg>
                   <input
-                    type="text"
-                    placeholder="Username"
+                    type="email"
+                    placeholder="your@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    aria-label="input username"
+                    aria-label="input email"
                     required
                   />
                 </label>
@@ -73,7 +89,7 @@ const CardLogin = () => {
                 <label className="label no-caret">
                   <span className="text-lg">Password</span>
                 </label>
-                <label className="input validator text-base-content">
+                <label className="input validator bg-neutral-900">
                   <svg
                     className="h-[1em] opacity-50"
                     xmlns="http://www.w3.org/2000/svg"
@@ -107,13 +123,13 @@ const CardLogin = () => {
               </div>
               <div className="form-control flex flex-col space-y-6 items-center max-w-full">
                 <div className="flex flex-row justify-between w-full p-4">
-                  <button
-                    aria-label="submit login admin form"
+                  <a
+                    href={"/Register"}
+                    aria-label="register button"
                     className="btn bg-white text-black mt-4"
-                    onClick={() => router.push("/Register")}
                   >
                     สมัครสมาชิก
-                  </button>
+                  </a>
                   <button
                     type="submit"
                     aria-label="submit login admin form"

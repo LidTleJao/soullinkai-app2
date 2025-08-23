@@ -5,5 +5,5 @@ import { isLoggedIn } from "../services/authService";
 
 export default function useAuthGuard() {
   const router = useRouter();
-  useEffect(()=>{ if(!isLoggedIn()) router.replace("/auth"); },[router]);
+  useEffect(()=>{ if(!isLoggedIn()) router.replace("/Login"); },[router]);
 }
