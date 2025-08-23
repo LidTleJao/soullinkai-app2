@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { El_Messiri } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body
         className={`${elMessiri.variable} antialiased`}
       >
+        <ToastContainer />
         {children}
       </body>
     </html>
