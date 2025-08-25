@@ -23,10 +23,11 @@ export async function deletePersona(id: string) {
 
 export async function uploadImage(personaId: string, file: File) {
   const form = new FormData();
-  form.append("file", file);
-  const r = await api.post(`/files/upload-image/${personaId}`, form, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  // ชื่อฟิลด์ควรตรงกับฝั่ง backend (ส่วนใหญ่ใช้ "file")
+  form.append("file", file, file.name);
+
+  // ❌ อย่าเซ็ต Content-Type เอง
+  const r = await api.post(`/files/upload-image/${personaId}`, form);
   return r.data;
 }
 

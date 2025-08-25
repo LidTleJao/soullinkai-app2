@@ -105,15 +105,17 @@ const CardPersona = ({ id }: { id: string }) => {
   if (!persona) return <p>Loading...</p>;
 
   return (
+    <div className="min-h-screen bg-[url('/Image/login.jpg')] bg-cover bg-center font-[family-name:var(--font-el-messiri)]">
     <div className="grid md:grid-cols-2 gap-6">
-      <div className="bg-white/5 border border-white/10 p-4 rounded-xl">
-        <h2 className="font-semibold mb-2">Upload picture</h2>
+      <div className="bg-black/85 border border-white/10 p-4 rounded-xl">
+        <h2 className="font-semibold mb-2 no-caret">Upload picture</h2>
         <FileUploader onUpload={sendImage} />
       </div>
-      <div className="bg-white/5 border border-white/10 p-4 rounded-xl">
-        <h2 className="font-semibold mb-2">Personality JSON</h2>
+      <div className="bg-black/85 border border-white/10 p-4 rounded-xl">
+        <h2 className="font-semibold mb-2 no-caret">Personality JSON</h2>
         <JsonEditor onSave={save} />
       </div>
+    </div>
     </div>
   );
 };

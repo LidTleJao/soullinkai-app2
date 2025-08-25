@@ -10,10 +10,12 @@ const CardLogin = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     try {
+      setLoading(true);
       await login(email, password);
       toast.success("เข้าสู่ระบบสำเร็จ 🎉", {
         position: "top-right",
@@ -37,6 +39,8 @@ const CardLogin = () => {
         });
         console.error("Login failed:", err);
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -44,8 +48,8 @@ const CardLogin = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-[url('/Image/herobottom.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
-        <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto border-2 border-neutral">
+      <div className="min-h-screen flex items-center justify-center lg:pr-44 bg-[url('/Image/login.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
+        <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto lg:ml-auto lg:mr-20 border-2 border-neutral">
           <div className="card-body">
             <h1 className="flex justify-center text-2xl font-bold mb-4 no-caret">
               เข้าสู่ระบบ
@@ -122,7 +126,7 @@ const CardLogin = () => {
                 </label>
               </div>
               <div className="form-control flex flex-col space-y-6 items-center max-w-full">
-                <div className="flex flex-row justify-between w-full p-4">
+                <div className="flex flex-row justify-between w-full p-2">
                   <a
                     href={"/Register"}
                     aria-label="register button"
@@ -136,7 +140,8 @@ const CardLogin = () => {
                     className="btn bg-white text-black mt-4"
                     onClick={handleLogin}
                   >
-                    เข้าสู่ระบบ
+                    {/* เข้าสู่ระบบ */}
+                    {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
                   </button>
                 </div>
                 <GoogleSigninButton onSuccess={onSuccess} />

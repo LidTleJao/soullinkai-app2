@@ -1,5 +1,5 @@
 import CardLogin from "../components/CardLogin";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/Navbar";
 
 const LoginPage = () => {
   return (

@@ -50,8 +50,8 @@ const CardRegister = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[url('/Image/herobottom.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
-      <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto border-2 border-neutral">
+    <div className="min-h-screen flex items-center justify-center lg:pl-44 bg-[url('/Image/signup.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
+      <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto lg:mr-auto lg:ml-20 border-2 border-neutral">
         <div className="card-body">
           <h1 className="flex justify-center text-2xl font-bold mb-4 no-caret">
             สมัครสมาชิก

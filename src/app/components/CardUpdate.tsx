@@ -12,7 +12,7 @@ interface Persona {
 type Mode = "personality" | "history";
 
 const CardUpdate = () => {
-      useAuthGuard();
+  useAuthGuard();
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
   const [mode, setMode] = useState<Mode>("personality");
@@ -45,9 +45,9 @@ const CardUpdate = () => {
     //   (r as any)?.choices?.[0]?.message?.content ??
     //   (typeof r === "string" ? r : JSON.stringify(r, null, 2));
     // ใช้ type แทน any
-  const content =
-    r.choices?.[0]?.message?.content ??
-    (typeof r === "string" ? r : JSON.stringify(r, null, 2));
+    const content =
+      r.choices?.[0]?.message?.content ??
+      (typeof r === "string" ? r : JSON.stringify(r, null, 2));
 
     setResult(content);
   };
@@ -57,7 +57,7 @@ const CardUpdate = () => {
     await saveJson(pid, result, mode);
     alert("Saved to storage");
   };
-return (
+  return (
     <div className="grid md:grid-cols-3 gap-6">
       <div className="md:col-span-2 bg-white/5 border border-white/10 p-4 rounded-xl">
         <div className="flex items-center gap-2 mb-2">

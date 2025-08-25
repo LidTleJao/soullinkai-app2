@@ -8,9 +8,13 @@ export const api = axios.create({
 
 // Attach token automatically
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("idToken");
-  if (token) {
-    config.headers.set("Authorization", `Bearer ${token}`);
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("idToken");
+    if (token) {
+      config.headers = config.headers ?? {};
+      // config.headers.set("Authorization", `Bearer ${token}`);
+      (config.headers as Record<string, string>)["Authorization"] = `Bearer ${token}`;
+    }
   }
   return config;
 });
