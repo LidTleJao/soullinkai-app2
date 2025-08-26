@@ -1,25 +1,4 @@
-// // ใช้ config จาก Firebase Console (Project settings > General > Your apps > SDK setup)
-// import { initializeApp } from "firebase/app";
-// import { getAuth } from "firebase/auth";
-// import { getFirestore } from "firebase/firestore";
-// import { getStorage } from "firebase/storage";
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCUDG3wzF0tQ5fMSkElX8xs61gLLGrRn54",
-//   authDomain: "website-soullinkai-563d7.firebaseapp.com",
-//   projectId: "website-soullinkai-563d7",
-//   storageBucket: "website-soullinkai-563d7.firebasestorage.app",
-//   messagingSenderId: "288543672793",
-//   appId: "1:288543672793:web:387f20e56a28047b35f1c8",
-//   measurementId: "G-WTMD0BJJBQ"
-// };
-
-// const app = initializeApp(firebaseConfig);
-// export const db = getFirestore(app);
-// export const storage = getStorage(app);
-// export const auth = getAuth(app);
-
-// ใช้ config จาก env เท่านั้น ห้าม hardcode
+"use client";
 import { initializeApp, getApps } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
