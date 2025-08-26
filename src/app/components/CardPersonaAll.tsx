@@ -77,7 +77,10 @@ const CardPersonaAll = () => {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]">
+      <div 
+      // className="min-h-screen flex flex-col bg-[url('/Image/personaAll.jpg')] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
+      className="min-h-screen flex flex-col bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FpersonaAll.jpg?alt=media&token=4fa3c745-4d04-4eef-b8fe-7c71a6dc7afb)] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
+      >
         <div className="flex flex-col items-center space-y-8 mb-10 no-caret">
           <h1 className="text-2xl lg:text-6xl font-bold">Your Personas</h1>
           <Link

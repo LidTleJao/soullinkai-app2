@@ -1,12 +1,14 @@
 import CardFeedback from "../components/CardFeedback";
 import Navbar from "../components/Navbar";
+import Protected from "../components/Protected";
 
-
-export default function FeedbackPage(){
+export default function FeedbackPage() {
   return (
     <>
-    <Navbar />
-    <CardFeedback />
+      <Protected>
+        <Navbar />
+        <CardFeedback />
+      </Protected>
     </>
   );
 }

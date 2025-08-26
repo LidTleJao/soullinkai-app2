@@ -4,8 +4,8 @@ import CardPersonaCreate from "../components/CardPersonaCreate";
 export default function CreatePage() {
   return (
     <>
-      <Navbar />
-      <CardPersonaCreate />
+        <Navbar />
+        <CardPersonaCreate />
     </>
   );
 }

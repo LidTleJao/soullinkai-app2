@@ -1,4 +1,3 @@
-
 "use client";
 import { useState } from "react";
 import { sendFeedback } from "../services/feedbackService";
@@ -34,10 +33,12 @@ const CardFeedback = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[url('/Image/login.jpg')] bg-cover bg-center font-[family-name:var(--font-el-messiri)]">
+    <div className="min-h-screen bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Flogin.jpg?alt=media&token=22362023-f57d-4066-b91d-209b63c9880e)] bg-cover bg-center font-[family-name:var(--font-el-messiri)]">
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
         <div className="card bg-black/80 border border-white/10 p-6 rounded-xl w-full max-w-lg">
-          <h1 className="text-3xl font-extrabold mb-4 no-caret">Send Feedback</h1>
+          <h1 className="text-3xl font-extrabold mb-4 no-caret">
+            Send Feedback
+          </h1>
           <textarea
             value={text}
             minLength={10}

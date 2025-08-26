@@ -9,7 +9,9 @@ import { toast } from "react-toastify";
 
 export default function SecurityForm() {
   const [otp, setOtp] = useState("");
-  const [qs, setQs] = useState([{ question: "Your first school?", answer: "" }]);
+  const [qs, setQs] = useState([
+    { question: "Your first school?", answer: "" },
+  ]);
 
   // loading flags
   const [loadingReq, setLoadingReq] = useState(false);
@@ -19,22 +21,32 @@ export default function SecurityForm() {
   const req = async () => {
     try {
       setLoadingReq(true);
+      // const r = await requestOtp();
       const r = await requestOtp();
+      // toast.success("ส่ง OTP ไปยังอีเมลของคุณแล้ว", { position: "top-right" });
+
+      if (r?.ok) {
+        toast.success("ยืนยัน OTP สำเร็จ 🎉", { position: "top-right" });
+      } else {
+        toast.error("OTP ไม่ถูกต้องหรือหมดอายุ", { position: "top-right" });
+      }
 
       // DEV-ONLY: แสดง OTP ด้วย toast (โปรดปิดใน production)
-      if (r?.otp) {
-        toast.info(`OTP (dev only): ${r.otp}`, {
-          position: "top-right",
-          autoClose: 5000,
-        });
-      } else {
-        toast.success("ส่ง OTP แล้ว โปรดตรวจอีเมล/เบอร์โทรของคุณ", {
-          position: "top-right",
-        });
-      }
+      // if (r?.otp) {
+      //   toast.info(`OTP (dev only): ${r.otp}`, {
+      //     position: "top-right",
+      //     autoClose: 5000,
+      //   });
+      // } else {
+      //   toast.success("ส่ง OTP แล้ว โปรดตรวจอีเมล/เบอร์โทรของคุณ", {
+      //     position: "top-right",
+      //   });
+      // }
     } catch (err) {
       console.error("requestOtp failed:", err);
-      toast.error("ขอ OTP ไม่สำเร็จ ลองใหม่อีกครั้ง", { position: "top-right" });
+      toast.error("ขอ OTP ไม่สำเร็จ ลองใหม่อีกครั้ง", {
+        position: "top-right",
+      });
     } finally {
       setLoadingReq(false);
     }
@@ -67,7 +79,9 @@ export default function SecurityForm() {
     // validate
     const invalid = qs.some((q) => !q.question.trim() || !q.answer.trim());
     if (invalid) {
-      toast.warn("กรุณากรอกคำถามและคำตอบให้ครบทุกข้อ", { position: "top-right" });
+      toast.warn("กรุณากรอกคำถามและคำตอบให้ครบทุกข้อ", {
+        position: "top-right",
+      });
       return;
     }
 
@@ -86,12 +100,12 @@ export default function SecurityForm() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]">
+    <div className="min-h-screen flex flex-col bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FadminDB.jpg?alt=media&token=f83560b4-9acf-43f5-85dc-7925c3e71fce)] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]">
       <div className="flex flex-col items-center space-y-8 mb-10 no-caret w-full max-w-3xl">
         <h1 className="text-2xl lg:text-6xl font-bold">Security</h1>
 
         {/* OTP Section */}
-        <div className="bg-white/5 p-4 rounded-xl border border-white/10 ">
+        <div className="bg-black/50 p-4 rounded-xl border border-white/10 ">
           <div className="font-semibold mb-2">One-Time Password</div>
           <div className="flex flex-wrap items-center gap-2">
             <button
@@ -113,7 +127,9 @@ export default function SecurityForm() {
               onClick={ver}
               disabled={loadingVer}
               className={`btn border-0 text-white px-3 py-1 rounded ${
-                loadingVer ? "bg-emerald-600/60 cursor-not-allowed" : "bg-emerald-600"
+                loadingVer
+                  ? "bg-emerald-600/60 cursor-not-allowed"
+                  : "bg-emerald-600"
               }`}
             >
               {loadingVer ? "Verifying..." : "Verify"}
@@ -125,7 +141,7 @@ export default function SecurityForm() {
         </div>
 
         {/* Security Questions */}
-        <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+        <div className="bg-black/50 p-4 rounded-xl border border-white/10">
           <div className="font-semibold">Security Questions</div>
           {qs.map((q, i) => (
             <div key={i} className="flex flex-col md:flex-row gap-2 mt-2">
@@ -162,7 +178,9 @@ export default function SecurityForm() {
               onClick={save}
               disabled={loadingSave}
               className={`btn border-0 text-white px-3 py-1 rounded ${
-                loadingSave ? "bg-purple-600/60 cursor-not-allowed" : "bg-purple-600"
+                loadingSave
+                  ? "bg-purple-600/60 cursor-not-allowed"
+                  : "bg-purple-600"
               }`}
             >
               {loadingSave ? "Saving..." : "Save"}

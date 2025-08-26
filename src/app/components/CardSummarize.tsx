@@ -67,7 +67,7 @@ const CardSummarize = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[url('/Image/login.jpg')] bg-cover bg-center flex flex-col items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]">
+    <div className="min-h-screen bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Flogin.jpg?alt=media&token=22362023-f57d-4066-b91d-209b63c9880e)] bg-cover bg-center flex flex-col items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]">
       {/* Responsive grid: 1 col บนมือถือ, 2 cols บนจอใหญ่ */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl">
         {/* Summarize Card */}

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 // src/app/update/page.tsx
 
 import { useEffect, useMemo, useState } from "react";
@@ -6,14 +6,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import useAuthGuard from "../hooks/useAuthGuard"; // ปรับ path ตามโปรเจคคุณ
 import { saveJson } from "../services/personaService"; // ปรับ path
 import { toast } from "react-toastify";
-import api from "../services/api"; // axios instance ของคุณ
+import { api } from "../services/api"; // axios instance ของคุณ
 
 export default function CardUpdate() {
   useAuthGuard();
   const router = useRouter();
   const sp = useSearchParams();
   // แนะนำให้ใช้คีย์ param เป็นตัวพิมพ์เล็ก เช่น ?persona=<id>
-  const personaId = useMemo(() => sp.get("persona") || sp.get("Persona") || "", [sp]);
+  const personaId = useMemo(
+    () => sp.get("persona") || sp.get("Persona") || "",
+    [sp]
+  );
 
   const [mode, setMode] = useState<"history" | "personality">("personality");
   const [text, setText] = useState("");
@@ -62,7 +65,9 @@ export default function CardUpdate() {
     try {
       JSON.parse(jsonOut);
     } catch {
-      const ok = confirm("JSON ยังไม่ถูกต้อง ต้องการบันทึกเป็นข้อความดิบหรือไม่?");
+      const ok = confirm(
+        "JSON ยังไม่ถูกต้อง ต้องการบันทึกเป็นข้อความดิบหรือไม่?"
+      );
       if (!ok) return;
     }
 
@@ -87,7 +92,9 @@ export default function CardUpdate() {
           <label className="font-semibold">Mode:</label>
           <select
             value={mode}
-            onChange={(e) => setMode(e.target.value as "history" | "personality")}
+            onChange={(e) =>
+              setMode(e.target.value as "history" | "personality")
+            }
             className="bg-black/40 border border-white/20 rounded px-2 py-1"
           >
             <option value="personality">personality</option>
@@ -106,7 +113,9 @@ export default function CardUpdate() {
           <button
             disabled={loading}
             onClick={summarize}
-            className={`btn mt-2 px-3 py-1 rounded border-0 text-white ${loading ? "bg-indigo-500/60" : "bg-indigo-500 hover:bg-indigo-600"}`}
+            className={`btn mt-2 px-3 py-1 rounded border-0 text-white ${
+              loading ? "bg-indigo-500/60" : "bg-indigo-500 hover:bg-indigo-600"
+            }`}
           >
             {loading ? "Summarizing..." : "Summarize with AI"}
           </button>
@@ -124,7 +133,11 @@ export default function CardUpdate() {
             <button
               disabled={saving}
               onClick={save}
-              className={`btn border-0 px-3 py-1 rounded text-white ${saving ? "bg-emerald-600/60" : "bg-emerald-600 hover:bg-emerald-700"}`}
+              className={`btn border-0 px-3 py-1 rounded text-white ${
+                saving
+                  ? "bg-emerald-600/60"
+                  : "bg-emerald-600 hover:bg-emerald-700"
+              }`}
             >
               {saving ? "Saving..." : "Save JSON"}
             </button>

@@ -48,7 +48,7 @@ const CardLogin = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center lg:pr-44 bg-[url('/Image/login.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
+      <div className="min-h-screen flex items-center justify-center lg:pr-44 bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Flogin.jpg?alt=media&token=22362023-f57d-4066-b91d-209b63c9880e)] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
         <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto lg:ml-auto lg:mr-20 border-2 border-neutral">
           <div className="card-body">
             <h1 className="flex justify-center text-2xl font-bold mb-4 no-caret">

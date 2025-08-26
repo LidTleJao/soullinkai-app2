@@ -50,7 +50,7 @@ const CardRegister = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center lg:pl-44 bg-[url('/Image/signup.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
+    <div className="min-h-screen flex items-center justify-center lg:pl-44 bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Fsignup.jpg?alt=media&token=87fdaf19-f691-413f-8b07-a461c7b8d189)] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
       <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto lg:mr-auto lg:ml-20 border-2 border-neutral">
         <div className="card-body">
           <h1 className="flex justify-center text-2xl font-bold mb-4 no-caret">

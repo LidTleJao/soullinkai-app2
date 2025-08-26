@@ -1,15 +1,14 @@
 import CardAdminDashboard from "../components/CardAdminDashboard";
 import NavbarAdmin from "../components/NavbarAdmin";
-
-
+import Protected from "../components/Protected";
 
 export default function AdminDashboardPage() {
   return (
     <>
-      <NavbarAdmin />
-      <CardAdminDashboard />
-      {/* <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <p>Welcome to the Admin Dashboard!</p> */}
+      <Protected>
+        <NavbarAdmin />
+        <CardAdminDashboard />
+      </Protected>
     </>
   );
 }

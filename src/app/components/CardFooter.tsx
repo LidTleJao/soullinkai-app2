@@ -1,7 +1,10 @@
 const CardFooter = () => {
   return (
     <>
-      <div className="hero min-h-screen no-caret bg-[url('/Image/footer.jpg')] bg-cover bg-center ">
+      <div
+        // className="hero min-h-screen no-caret bg-[url('/Image/footer.jpg')] bg-cover bg-center "
+        className="hero min-h-screen no-caret bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Ffooter.jpg?alt=media&token=f6f6f512-5e9f-4aa2-b68c-a2ac579916a2)] bg-cover bg-center "
+      >
         <div className="hero-content text-center flex-col font-[family-name:var(--font-el-messiri)]">
           <div className="max-w-max space-y-8 mt-16">
             <h4 className="text-4xl sm:text-6xl lg:text-8xl font-bold">

@@ -42,7 +42,10 @@ const CardPersonaCreate = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-[url('/Image/herobottom.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
+      <div 
+      // className="min-h-screen flex items-center justify-center bg-[url('/Image/persona.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]"
+      className="min-h-screen flex items-center justify-center bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Fpersona.jpg?alt=media&token=c514724f-feec-446f-8361-e8ce25ed8492)] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]"
+      >
         <div className="max-w-xl mx-auto bg-black/80 border border-white/10 p-6 rounded-xl">
           <h1 className="text-2xl font-bold mb-3 no-caret">Create new persona</h1>
 

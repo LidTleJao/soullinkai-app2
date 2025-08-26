@@ -58,7 +58,7 @@ export default function CardAdminDashboard() {
 
   return (
     <div
-      className="min-h-screen w-full p-6 space-y-8"
+      className="min-h-screen w-full p-6 space-y-8 bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FadminDB.jpg?alt=media&token=f83560b4-9acf-43f5-85dc-7925c3e71fce)] bg-cover bg-center"
       // สีคงที่ (ไม่อิงธีม)
       style={{ backgroundColor: "#0B0D10", color: "#EAF2FF" }}
     >

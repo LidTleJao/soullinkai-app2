@@ -48,7 +48,7 @@ export default function SubscriptionForm() {
   };
 
   return (
-    <div className="min-h-screen bg-[url('/Image/heroBottom.jpg')] bg-cover bg-center flex flex-col items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]">
+    <div className="min-h-screen bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FpersonaAll.jpg?alt=media&token=4fa3c745-4d04-4eef-b8fe-7c71a6dc7afb)] bg-cover bg-center flex flex-col items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]">
       <h1 className="text-2xl lg:text-5xl font-bold mb-4 text-[#EAF2FF] no-caret">Subscription</h1>
       <div className="w-full max-w-xl">
         {loading ? (

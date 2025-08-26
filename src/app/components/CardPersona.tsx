@@ -47,7 +47,7 @@ const CardPersona = ({ id }: { id: string }) => {
 
   return (
     <>
-      <div className="min-h-screen bg-[url('/Image/login.jpg')] bg-cover bg-center font-[family-name:var(--font-el-messiri)]">
+      <div className="min-h-screen bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Flogin.jpg?alt=media&token=22362023-f57d-4066-b91d-209b63c9880e)] bg-cover bg-center font-[family-name:var(--font-el-messiri)]">
         <div className="grid md:grid-cols-2 gap-6 no-caret">
           <div className="bg-white/5 border border-white/10 p-4 rounded-xl">
             <h2 className="font-semibold mb-3">Picture</h2>
