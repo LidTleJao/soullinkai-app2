@@ -1,110 +1,142 @@
-"use client";
-import { useEffect, useState } from "react";
-import useAuthGuard from "../hooks/useAuthGuard";
-import { summarize } from "../services/aiService";
-import { listPersonas, saveJson } from "../services/personaService";
+'use client';
+// src/app/update/page.tsx
 
-interface Persona {
-  id: string;
-  name: string;
-  description?: string;
-}
-type Mode = "personality" | "history";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import useAuthGuard from "../hooks/useAuthGuard"; // ปรับ path ตามโปรเจคคุณ
+import { saveJson } from "../services/personaService"; // ปรับ path
+import { toast } from "react-toastify";
+import api from "../services/api"; // axios instance ของคุณ
 
-const CardUpdate = () => {
+export default function CardUpdate() {
   useAuthGuard();
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState("");
-  const [mode, setMode] = useState<Mode>("personality");
-  const [personas, setPersonas] = useState<Persona[]>([]);
-  const [pid, setPid] = useState<string>("");
+  const router = useRouter();
+  const sp = useSearchParams();
+  // แนะนำให้ใช้คีย์ param เป็นตัวพิมพ์เล็ก เช่น ?persona=<id>
+  const personaId = useMemo(() => sp.get("persona") || sp.get("Persona") || "", [sp]);
 
-  // สร้างตัว state รอให้ client mount ก่อนใช้ router
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true); // client-side เท่านั้น
-  }, []);
+  const [mode, setMode] = useState<"history" | "personality">("personality");
+  const [text, setText] = useState("");
+  const [jsonOut, setJsonOut] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (!mounted) return;
-    (async () => {
-      const ps = await listPersonas();
-      setPersonas(ps);
-      // ตัวอย่าง router query ใน app dir: router.searchParams.get('persona')
-      // หรือถ้าใช้ page params ให้ใช้ prop params
-    })();
-  }, [mounted]);
+    if (!personaId) {
+      toast.error("ไม่พบ personaId", { position: "top-right" });
+      router.push("/Personas");
+    }
+  }, [personaId, router]);
 
-  if (!mounted) return <p>Loading...</p>; // ป้องกัน SSR error
-
-  const run = async () => {
-    if (!input) return alert("Paste text first");
-    const r = await summarize(input, mode);
-    // const content =
-    //   (r as any)?.choices?.[0]?.message?.content ??
-    //   (typeof r === "string" ? r : JSON.stringify(r, null, 2));
-    // ใช้ type แทน any
-    const content =
-      r.choices?.[0]?.message?.content ??
-      (typeof r === "string" ? r : JSON.stringify(r, null, 2));
-
-    setResult(content);
+  const summarize = async () => {
+    if (!text.trim()) {
+      toast.warn("กรุณาวางข้อความก่อน", { position: "top-right" });
+      return;
+    }
+    try {
+      setLoading(true);
+      const { data } = await api.post("/ai/summarize", { text, mode });
+      // xAI (OpenAI-compatible) มักจะคืน choices[0].message.content
+      const content = data?.choices?.[0]?.message?.content ?? "";
+      if (!content) {
+        toast.error("ไม่ได้รับผลลัพธ์จาก AI", { position: "top-right" });
+        return;
+      }
+      setJsonOut(content);
+      toast.success("สรุปสำเร็จ ✨", { position: "top-right" });
+    } catch (e) {
+      console.error(e);
+      toast.error("สรุปไม่สำเร็จ", { position: "top-right" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const save = async () => {
-    if (!pid) return alert("Select persona");
-    await saveJson(pid, result, mode);
-    alert("Saved to storage");
+    if (!personaId) return;
+    if (!jsonOut.trim()) {
+      toast.warn("ยังไม่มี JSON ให้บันทึก", { position: "top-right" });
+      return;
+    }
+    // ตรวจ JSON ก่อน
+    try {
+      JSON.parse(jsonOut);
+    } catch {
+      const ok = confirm("JSON ยังไม่ถูกต้อง ต้องการบันทึกเป็นข้อความดิบหรือไม่?");
+      if (!ok) return;
+    }
+
+    try {
+      setSaving(true);
+      await saveJson(personaId, jsonOut, mode);
+      toast.success("บันทึก JSON สำเร็จ", { position: "top-right" });
+    } catch (e) {
+      console.error(e);
+      toast.error("บันทึกไม่สำเร็จ", { position: "top-right" });
+    } finally {
+      setSaving(false);
+    }
   };
+
   return (
-    <div className="grid md:grid-cols-3 gap-6">
-      <div className="md:col-span-2 bg-white/5 border border-white/10 p-4 rounded-xl">
-        <div className="flex items-center gap-2 mb-2">
-          <select
-            value={pid}
-            onChange={(e) => setPid(e.target.value)}
-            className="bg-black/40 border border-white/20 rounded px-2 py-1"
-          >
-            <option value="">-- Select persona --</option>
-            {personas.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name}
-              </option>
-            ))}
-          </select>
+    <div className="min-h-screen p-6 max-w-5xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Update Persona JSON</h1>
+
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-3 items-center">
+          <label className="font-semibold">Mode:</label>
           <select
             value={mode}
-            onChange={(e) => setMode(e.target.value as Mode)}
+            onChange={(e) => setMode(e.target.value as "history" | "personality")}
             className="bg-black/40 border border-white/20 rounded px-2 py-1"
           >
-            <option value="personality">Update personality</option>
-            <option value="history">Update history</option>
+            <option value="personality">personality</option>
+            <option value="history">history</option>
           </select>
-          <button onClick={run} className="bg-indigo-600 px-3 py-1 rounded">
-            Summarize
-          </button>
-          <button onClick={save} className="bg-emerald-600 px-3 py-1 rounded">
-            Save result
+        </div>
+
+        <div>
+          <label className="font-semibold block mb-2">Paste text</label>
+          <textarea
+            className="w-full h-40 bg-black/40 border border-white/20 rounded p-2"
+            placeholder="วางข้อความที่ต้องการให้ AI สรุปเป็น JSON"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button
+            disabled={loading}
+            onClick={summarize}
+            className={`btn mt-2 px-3 py-1 rounded border-0 text-white ${loading ? "bg-indigo-500/60" : "bg-indigo-500 hover:bg-indigo-600"}`}
+          >
+            {loading ? "Summarizing..." : "Summarize with AI"}
           </button>
         </div>
-        <textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Paste here..."
-          className="w-full h-64 bg-black/40 border border-white/20 rounded p-2"
-        />
-      </div>
-      <div className="bg-white/5 border border-white/10 p-4 rounded-xl">
-        <div className="font-semibold mb-2">Your result…</div>
-        <textarea
-          value={result}
-          onChange={(e) => setResult(e.target.value)}
-          className="w-full h-64 bg-black/40 border border-white/20 rounded p-2 font-mono text-xs"
-        />
+
+        <div>
+          <label className="font-semibold block mb-2">JSON Result</label>
+          <textarea
+            className="w-full h-60 bg-black/40 border border-white/20 rounded p-2 font-mono text-sm"
+            placeholder='{"...": "..."}'
+            value={jsonOut}
+            onChange={(e) => setJsonOut(e.target.value)}
+          />
+          <div className="flex gap-2 mt-2">
+            <button
+              disabled={saving}
+              onClick={save}
+              className={`btn border-0 px-3 py-1 rounded text-white ${saving ? "bg-emerald-600/60" : "bg-emerald-600 hover:bg-emerald-700"}`}
+            >
+              {saving ? "Saving..." : "Save JSON"}
+            </button>
+            <button
+              onClick={() => router.push(`/Persona/${personaId}`)}
+              className="btn border-0 px-3 py-1 rounded bg-gray-600 text-white hover:bg-gray-700"
+            >
+              Back to Detail
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
-};
-
-export default CardUpdate;
+}

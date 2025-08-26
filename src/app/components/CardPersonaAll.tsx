@@ -1,77 +1,3 @@
-// 'use client';
-// import { useEffect, useState } from 'react';
-// import useAuthGuard from '../hooks/useAuthGuard';
-// import { listPersonas, createPersona } from '../services/personaService';
-// import PersonaCard from '../components/PersonaCard';
-// import Link from 'next/link';
-
-// interface Persona {
-//   id: string;
-//   name: string;
-//   description?: string;
-// }
-
-// const CardPersonaAll = () => {
-//     useAuthGuard();
-//   const [items, setItems] = useState<Persona[]>([]);
-//   const [name, setName] = useState('');
-//   const [desc, setDesc] = useState('');
-
-//   const load = async () => {
-//     const all = await listPersonas();
-//     setItems(all as Persona[]);
-//   };
-
-//   useEffect(() => {
-//     load();
-//   }, []);
-
-//   const add = async () => {
-//     if (!name) return alert('Name required');
-//     await createPersona({ name, description: desc });
-//     setName('');
-//     setDesc('');
-//     load();
-//   };
-//     return (
-//         <>
-//         <div className="flex items-center justify-between mb-4">
-//         <h1 className="text-2xl font-bold">Your Personas</h1>
-//         <Link href="/create" className="bg-white text-black px-4 py-1 rounded-full">
-//           Create new
-//         </Link>
-//       </div>
-
-//       <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6">
-//         <div className="font-semibold mb-2">Quick create</div>
-//         <input
-//           placeholder="Name"
-//           value={name}
-//           onChange={(e) => setName(e.target.value)}
-//           className="mr-2 px-2 py-1 bg-black/40 border border-white/20 rounded"
-//         />
-//         <input
-//           placeholder="Description"
-//           value={desc}
-//           onChange={(e) => setDesc(e.target.value)}
-//           className="mr-2 px-2 py-1 bg-black/40 border border-white/20 rounded"
-//         />
-//         <button onClick={add} className="bg-emerald-600 px-3 py-1 rounded">
-//           Create
-//         </button>
-//       </div>
-
-//       <div className="grid md:grid-cols-3 gap-4">
-//         {items.map((p) => (
-//           <PersonaCard key={p.id} persona={p} onChange={load} />
-//         ))}
-//       </div>
-//         </>
-//     );
-// };
-
-// export default CardPersonaAll;
-
 // src/app/components/CardPersonaAll.tsx
 "use client";
 import { useEffect, useState } from "react";
@@ -92,7 +18,8 @@ const CardPersonaAll = () => {
   const [items, setItems] = useState<Persona[]>([]);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // โหลดรายการ
+  const [creating, setCreating] = useState(false); // กด Create
   const [errMsg, setErrMsg] = useState<string | null>(null);
 
   const load = async () => {
@@ -103,8 +30,7 @@ const CardPersonaAll = () => {
       setItems(all as Persona[]);
     } catch (e) {
       console.error("listPersonas failed:", e);
-      toast.error("โหลด personas ไม่สำเร็จ", { position: "top-right" });
-      // setErrMsg(e?.response?.data?.error || e?.message || "Failed to load personas");
+      toast.error("โหลดรายการตัวละครไม่สำเร็จ", { position: "top-right" });
     } finally {
       setLoading(false);
     }
@@ -115,16 +41,37 @@ const CardPersonaAll = () => {
   }, []);
 
   const add = async () => {
-    if (!name) return alert("Name required");
+    const trimmed = name.trim();
+    if (!trimmed) {
+      toast.warn("กรุณากรอกชื่อก่อนสร้าง", { position: "top-right" });
+      return;
+    }
+    if (trimmed.length > 80) {
+      toast.warn("ชื่อยาวเกินไป (จำกัด 80 ตัวอักษร)", {
+        position: "top-right",
+      });
+      return;
+    }
+
     try {
-      await createPersona({ name, description: desc });
+      setCreating(true);
+      await createPersona({
+        name: trimmed,
+        description: desc.trim() || undefined,
+      });
       setName("");
       setDesc("");
+      console.log("createPersona success : ", creating);
+      toast.success("สร้างตัวละครสำเร็จ ✨", {
+        position: "top-right",
+        autoClose: 2200,
+      });
       await load();
     } catch (e) {
       console.error("createPersona failed:", e);
-      toast.error("โหลด personas ไม่สำเร็จ", { position: "top-right" });
-      // alert(e?.response?.data?.error || e?.message || "Create failed");
+      toast.error("สร้างตัวละครไม่สำเร็จ", { position: "top-right" });
+    } finally {
+      setCreating(false);
     }
   };
 
@@ -167,7 +114,7 @@ const CardPersonaAll = () => {
           </div>
         )}
 
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 gap-4 w-full max-w-6xl">
           {items.map((p) => (
             <PersonaCard key={p.id} persona={p} onChange={load} />
           ))}

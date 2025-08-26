@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useRouter } from "next/navigation";
 import { deletePersona } from "../services/personaService";
@@ -7,6 +8,7 @@ interface Persona {
   id: string;
   name: string;
   description?: string;
+  imageUrl?: string;
 }
 
 interface PersonaCardProps {
@@ -42,7 +44,20 @@ export default function PersonasCard({ persona, onChange }: PersonaCardProps) {
     <>
       <div className="bg-white/5 border border-white/10 rounded-xl p-4">
         <div className="flex gap-3">
-          <div className="w-16 h-16 bg-white/10 rounded-full shrink-0" />
+          {/* <div className="w-16 h-16 bg-white/10 rounded-full shrink-0" /> */}
+          {persona.imageUrl ? (
+            <img
+              src={persona.imageUrl}
+              alt={persona.name}
+              width={64}
+              height={64}
+              className="w-16 h-16 bg-white/10 rounded-full shrink-0"
+            />
+          ) : (
+            <div className="w-16 h-16 flex items-center justify-center text-xs text-white/60">
+              No image
+            </div>
+          )}
           <div className="flex-1">
             <div className="font-semibold">{persona.name}</div>
             <div className="text-white/70 text-sm">
@@ -56,7 +71,7 @@ export default function PersonasCard({ persona, onChange }: PersonaCardProps) {
                 Edit
               </button>
               <button
-                onClick={() => router.push(`/update?Persona=${persona.id}`)}
+                onClick={() => router.push(`/Update?Persona=${persona.id}`)}
                 className="btn bg-indigo-500 text-white border-0 px-3 py-1 rounded"
               >
                 Update JSON
