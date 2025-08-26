@@ -65,8 +65,7 @@ export default function PersonasCard({ persona, onChange }: PersonaCardProps) {
             </div>
             <div className="mt-2 flex gap-2">
               <button
-                // onClick={() => router.push(`/Persona/${persona.id}`)}
-                onClick={() => router.push(`/Persona?id=${persona.id}`)}
+                onClick={() => router.push(`/Persona/${persona.id}`)}
                 className="btn  bg-emerald-500 text-white border-0 px-3 py-1 rounded"
               >
                 Edit
