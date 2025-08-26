@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -13,15 +12,11 @@ const CardRegister = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ ฟังก์ชันเช็ค email format
-  const isValidEmail = (value: string) => {
-    return /\S+@\S+\.\S+/.test(value);
-  };
+  const isValidEmail = (value: string) => /\S+@\S+\.\S+/.test(value);
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
 
-    // ✅ validation frontend ก่อนส่งไป backend
     if (!isValidEmail(email)) {
       toast.error("กรุณากรอกอีเมลให้ถูกต้อง", { position: "top-right" });
       return;
@@ -35,16 +30,14 @@ const CardRegister = () => {
 
     try {
       setLoading(true);
-
       await register(email, password);
 
-      toast.success("สมัครสมาชิกสำเร็จ ", {
+      toast.success("สมัครสมาชิกสำเร็จ 🎉", {
         position: "top-right",
         autoClose: 3000,
       });
 
-      // ✅ ไปหน้า verify (คุณสร้างไว้แล้ว)
-      router.push("/verify");
+      router.push("/Verify");
     } catch (err) {
       toast.error(`สมัครสมาชิกไม่สำเร็จ`, {
         position: "top-right",
@@ -57,8 +50,8 @@ const CardRegister = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[url('/Image/herobottom.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
-      <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto border-2 border-neutral">
+    <div className="min-h-screen flex items-center justify-center lg:pl-44 bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Fsignup.jpg?alt=media&token=87fdaf19-f691-413f-8b07-a461c7b8d189)] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
+      <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto lg:mr-auto lg:ml-20 border-2 border-neutral">
         <div className="card-body">
           <h1 className="flex justify-center text-2xl font-bold mb-4 no-caret">
             สมัครสมาชิก
@@ -91,7 +84,7 @@ const CardRegister = () => {
               <label className="input validator bg-neutral-900">
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   aria-label="input password"
@@ -101,11 +94,11 @@ const CardRegister = () => {
               </label>
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-2 rounded text-white ${
+              className={`w-full py-2 rounded ${
                 loading
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-indigo-600 hover:bg-indigo-700"

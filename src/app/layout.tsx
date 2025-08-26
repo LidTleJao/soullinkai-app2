@@ -13,7 +13,7 @@ const elMessiri = El_Messiri({
 });
 
 export const metadata: Metadata = {
-  title: "Web Soul Link AI",
+  title: "Ever Link AI",
   description: "A web application that connects souls through AI",
 };
 

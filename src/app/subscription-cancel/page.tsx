@@ -1,13 +1,13 @@
-import CardUpdate from "../components/CardUpdate";
+import CardSubscriptionCancel from "../components/CardSubscriptionCancel";
 import Navbar from "../components/Navbar";
 import Protected from "../components/Protected";
 
-export default function UpdatePage() {
+export default function SubscriptionCancelPage() {
   return (
     <>
       <Protected>
         <Navbar />
-        <CardUpdate />
+        <CardSubscriptionCancel />
       </Protected>
     </>
   );

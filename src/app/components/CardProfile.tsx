@@ -16,7 +16,7 @@ const CardProfile = () => {
 
   const handleLogout = () => {
     logout();
-    router.push("/auth");
+    router.push("/Login");
   };
 
   if (!uid) return <p>Loading...</p>; // รอโหลด client

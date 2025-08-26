@@ -1,11 +1,14 @@
-
+import Navbar from "../components/Navbar";
+import Protected from "../components/Protected";
 import SecurityForm from "../components/SecurityForm";
 
-export default function SecurityPage(){
+export default function SecurityPage() {
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4">Security</h1>
-      <SecurityForm />
+      <Protected>
+        <Navbar />
+        <SecurityForm />
+      </Protected>
     </>
   );
 }

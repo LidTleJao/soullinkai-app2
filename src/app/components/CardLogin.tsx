@@ -4,32 +4,52 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "../services/authService";
 import GoogleSigninButton from "./GoogleSigninButton";
+import { toast } from "react-toastify";
 
 const CardLogin = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     try {
+      setLoading(true);
       await login(email, password);
-      router.push("/verify");
+      toast.success("เข้าสู่ระบบสำเร็จ 🎉", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      router.push("/Verify");
     } catch (err: unknown) {
-    if (err instanceof Error) {
-      alert(err.message);
-    } else {
-      alert("Something went wrong");
+      if (err) {
+        // alert(err.message);
+        toast.error(`เข้าสู่ระบบไม่สำเร็จ`, {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.error("Login failed:", err);
+      } else {
+        // alert("Something went wrong");
+        toast.error(`Something went wrong`, {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.error("Login failed:", err);
+      }
+    } finally {
+      setLoading(false);
     }
   }
-  }
 
-  const onSuccess = () => router.push("/verify");
+  const onSuccess = () => router.push("/Verify");
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-[url('/Image/herobottom.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
-        <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto border-2 border-neutral">
+      <div className="min-h-screen flex items-center justify-center lg:pr-44 bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Flogin.jpg?alt=media&token=22362023-f57d-4066-b91d-209b63c9880e)] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]">
+        <div className="card card-border bg-white/0 backdrop-blur-md rounded-xl items-center max-w-md mx-auto lg:ml-auto lg:mr-20 border-2 border-neutral">
           <div className="card-body">
             <h1 className="flex justify-center text-2xl font-bold mb-4 no-caret">
               เข้าสู่ระบบ
@@ -42,7 +62,7 @@ const CardLogin = () => {
                 <label className="label no-caret">
                   <span className="text-lg ">Email</span>
                 </label>
-                <label className="input validator text-base-content">
+                <label className="input validator bg-neutral-900">
                   <svg
                     className="h-[1em] opacity-50"
                     xmlns="http://www.w3.org/2000/svg"
@@ -60,11 +80,11 @@ const CardLogin = () => {
                     </g>
                   </svg>
                   <input
-                    type="text"
-                    placeholder="Username"
+                    type="email"
+                    placeholder="your@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    aria-label="input username"
+                    aria-label="input email"
                     required
                   />
                 </label>
@@ -73,7 +93,7 @@ const CardLogin = () => {
                 <label className="label no-caret">
                   <span className="text-lg">Password</span>
                 </label>
-                <label className="input validator text-base-content">
+                <label className="input validator bg-neutral-900">
                   <svg
                     className="h-[1em] opacity-50"
                     xmlns="http://www.w3.org/2000/svg"
@@ -106,21 +126,22 @@ const CardLogin = () => {
                 </label>
               </div>
               <div className="form-control flex flex-col space-y-6 items-center max-w-full">
-                <div className="flex flex-row justify-between w-full p-4">
-                  <button
-                    aria-label="submit login admin form"
+                <div className="flex flex-row justify-between w-full p-2">
+                  <a
+                    href={"/Register"}
+                    aria-label="register button"
                     className="btn bg-white text-black mt-4"
-                    onClick={() => router.push("/Register")}
                   >
                     สมัครสมาชิก
-                  </button>
+                  </a>
                   <button
                     type="submit"
                     aria-label="submit login admin form"
                     className="btn bg-white text-black mt-4"
                     onClick={handleLogin}
                   >
-                    เข้าสู่ระบบ
+                    {/* เข้าสู่ระบบ */}
+                    {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
                   </button>
                 </div>
                 <GoogleSigninButton onSuccess={onSuccess} />
