@@ -41,16 +41,19 @@ export default function NavbarAdmin() {
         <div className="hidden md:flex items-center space-x-4">
           <p
             className="
-               font-[family-name:var(--font-el-messiri)]"
+               font-[family-name:var(--font-noto-sans-thai)]"
           >
             ผู้ดูแลระบบ
           </p>
-          <Link href="/AdminDashboard" className="btn btn-ghost">
+          <Link
+            href="/AdminDashboard"
+            className="btn btn-neutral bg-green-300 hover:bg-green-500 text-white border-0 rounded-lg"
+          >
             Dashboard
           </Link>
           <button
             onClick={handleLogout}
-            className="btn btn-ghost hover:bg-red-500"
+            className="btn btn-ghost border-0 rounded-lg hover:bg-red-500"
           >
             Logout
           </button>
@@ -61,10 +64,16 @@ export default function NavbarAdmin() {
 
     return (
       <div className="hidden md:flex items-center space-x-4">
-        <Link href="/" className="btn btn-ghost">
+        <Link
+          href="/"
+          className="btn btn-neutral bg-green-300 hover:bg-green-500 border-0 text-white rounded-lg"
+        >
           Home
         </Link>
-        <Link href="/Login" className="btn btn-ghost">
+        <Link
+          href="/Login"
+          className="btn btn-neutral bg-blue-300 hover:bg-blue-500 text-white border-0 rounded-lg"
+        >
           Login
         </Link>
         <Theme_Controller />
@@ -110,16 +119,14 @@ export default function NavbarAdmin() {
         </button>
 
         <div className="flex flex-col space-y-4">
-            <div className="flex justify-center items-center">
-          <p
-            className="
-               font-[family-name:var(--font-el-messiri)]"
-          >
-            ผู้ดูแลระบบ
-          </p></div>
+          <div className="flex justify-center items-center">
+            <p className="font-[family-name:var(--font-noto-sans-thai)]">
+              ผู้ดูแลระบบ
+            </p>
+          </div>
           <Link
             href="/AdminDashboard"
-            className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+            className="btn btn-neutral bg-green-300 hover:bg-green-500 text-white border-0 rounded-2xl"
             onClick={() => setIsMenuOpen(false)}
           >
             Dashboard
@@ -137,7 +144,7 @@ export default function NavbarAdmin() {
           ) : (
             <Link
               href="/Login"
-              className="btn btn-ghost border-2 border-base-100 rounded-2xl"
+              className="btn btn-neutral bg-blue-300 hover:bg-blue-500 border-2 border-base-100 rounded-2xl"
               onClick={() => setIsMenuOpen(false)}
             >
               Login

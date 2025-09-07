@@ -44,16 +44,17 @@ const CardPersonaCreate = () => {
     <>
       <div 
       // className="min-h-screen flex items-center justify-center bg-[url('/Image/persona.jpg')] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]"
-      className="min-h-screen flex items-center justify-center bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Fpersona.jpg?alt=media&token=c514724f-feec-446f-8361-e8ce25ed8492)] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]"
+      // className="min-h-screen flex items-center justify-center bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Fpersona.jpg?alt=media&token=c514724f-feec-446f-8361-e8ce25ed8492)] bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]"
+      className="min-h-screen flex items-center justify-center bg-base-100 text-base-content bg-cover bg-center p-4 font-[family-name:var(--font-el-messiri)]"
       >
-        <div className="max-w-xl mx-auto bg-black/80 border border-white/10 p-6 rounded-xl">
+        <div className="max-w-xl mx-auto border-green-300 border-2 p-6 rounded-xl">
           <h1 className="text-2xl font-bold mb-3 no-caret">Create new persona</h1>
 
           <label className="block text-sm mb-1 no-caret">Name your character</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full mb-3 px-3 py-2 bg-black/40 border border-white/20 rounded"
+            className="input w-full mb-3 px-3 py-2 text-black bg-white border-blue-300 border-2 rounded"
             placeholder="e.g., Luna"
           />
 
@@ -61,11 +62,11 @@ const CardPersonaCreate = () => {
           <input
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
-            className="w-full mb-4 px-3 py-2 bg-black/40 border border-white/20 rounded"
+            className="input w-full mb-4 px-3 py-2 text-black bg-white border-blue-300 border-2 rounded"
             placeholder="e.g., calm strategist"
           />
 
-          <p className="text-sm text-white/70 mb-2 no-caret">
+          <p className="text-sm mb-2 no-caret">
             Upload picture after creating on the detail page.
           </p>
 
@@ -73,16 +74,16 @@ const CardPersonaCreate = () => {
             <button
               onClick={submit}
               disabled={loading}
-              className={`btn bg-white text-black px-5 py-2 rounded-full ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+              className={`btn btn-neutral bg-blue-300 hover:bg-blue-500 border-0 text-white px-5 py-2 rounded-full ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
             >
               {loading ? "Creating..." : "Create"}
             </button>
             <button
               onClick={() => router.back()}
               disabled={loading}
-              className="btn bg-gray-500 text-white px-5 py-2 rounded-full"
+              className="btn btn-neutral bg-red-500 hover:bg-red-700 text-white border-0 px-5 py-2 rounded-full"
             >
-              Cancel
+              Back
             </button>
           </div>
         </div>

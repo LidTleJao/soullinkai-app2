@@ -64,7 +64,7 @@ export default function GoogleSigninButton({
     <button
       type="button"
       onClick={handleGoogle}
-      className="btn bg-white text-black w-full"
+      className="btn btn-neutral bg-white shadow-sm text-black border-0 border-amber-100 hover:bg-black/20 w-full rounded-xl"
       aria-label="Sign in with Google"
     >
       <svg

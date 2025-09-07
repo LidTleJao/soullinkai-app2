@@ -1,12 +1,16 @@
 const CardOur = () => {
   return (
     <>
-      <div 
-      // className="hero min-h-screen no-caret bg-[url('/Image/our.jpg')] bg-cover bg-center font-[family-name:var(--font-el-messiri)] p-0 lg:p-20"
-      className="hero min-h-screen no-caret bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Four.jpg?alt=media&token=1d2c33b9-d75f-4c2c-8e66-187f4eb8ac51)] bg-cover bg-center font-[family-name:var(--font-el-messiri)] p-0 lg:p-20"
-      >
-        <div className="flex items-center justify-end w-full h-full">
-          <div className="max-w-2xl space-y-4">
+      <div className=" grid grid-cols-1 lg:grid-cols-2 bg-base-100 items-center gap-8 no-caret px-4 sm:px-8 lg:px-16 py-16">
+        <div className="order-1 lg:order-1 flex justify-center lg:justify-start">
+          <div
+            // className="hidden lg:flex w-56 h-56 sm:w-7/12 sm:h-72 lg:w-[40rem] lg:h-[28rem] bg-[url('/Image/flower.png')] bg-contain bg-no-repeat bg-center transform scale-x-[-1] "
+            className="hidden lg:flex w-56 h-56 sm:w-7/12 sm:h-72 lg:w-[40rem] lg:h-[28rem] bg-[url('https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Fflower.png?alt=media&token=4a65cf40-b5c9-4d74-8ddb-19fc2d98196a')] bg-contain bg-no-repeat bg-center transform scale-x-[-1] "
+            aria-hidden
+          />
+        </div>
+        <div className="order-2 lg:order-2 flex items-center justify-center lg:justify-end">
+          <div className="card max-w-2xl space-y-4 border-2 border-blue-300 rounded-2xl p-8 bg-base-100 text-base-content">
             <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
               Our Story
             </h3>

@@ -1,27 +1,72 @@
 "use client";
 import React, { useEffect } from "react";
 
+type Theme = "light" | "dark";
+
+const getInitialTheme = (): Theme => {
+  try {
+    const stored = localStorage.getItem("theme") as Theme | null;
+    if (stored === "light" || stored === "dark") return stored;
+  } catch {}
+  // fallback ตามระบบ
+  if (
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-color-scheme: dark)").matches
+  ) {
+    return "dark";
+  }
+  return "light";
+};
+
 const Theme_Controller = () => {
-  const [theme, setTheme] = React.useState<string>("light");
+  // const [theme, setTheme] = React.useState<string>("dark");
 
-  useEffect(() => {
-    // ดึงค่าจาก localStorage เฉพาะตอน client mount
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
-      setTheme(storedTheme);
-      document.documentElement.setAttribute("data-theme", storedTheme);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // ดึงค่าจาก localStorage เฉพาะตอน client mount
+  //   const storedTheme = localStorage.getItem("theme");
+  //   if (storedTheme) {
+  //     setTheme(storedTheme);
+  //     document.documentElement.setAttribute("data-theme", storedTheme);
+  //   }
+  // }, []);
 
+  // useEffect(() => {
+  //   // sync ทุกครั้งที่ theme เปลี่ยน
+  //   document.documentElement.setAttribute("data-theme", theme);
+  //   localStorage.setItem("theme", theme);
+  // }, [theme]);
+
+  // const toggleTheme = () => {
+  //   setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  // };
+
+  const [theme, setTheme] = React.useState<Theme>(getInitialTheme);
+
+  // sync ค่าเข้ากับ <html data-theme="..."> และ localStorage ทุกครั้งที่ theme เปลี่ยน
   useEffect(() => {
-    // sync ทุกครั้งที่ theme เปลี่ยน
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {}
   }, [theme]);
 
-  const toggleTheme = () => {
+  // ถ้า "ยังไม่เคยตั้งเอง" ให้ตามระบบเมื่อระบบเปลี่ยน (optional)
+  useEffect(() => {
+    const mq = window.matchMedia?.("(prefers-color-scheme: light)");
+    if (!mq) return;
+
+    const onChange = (e: MediaQueryListEvent) => {
+      // ถ้าผู้ใช้เคยตั้งค่าเองแล้ว ให้เคารพค่าที่ตั้งไว้ (มีค่าใน localStorage ก็ไม่ override)
+      const stored = localStorage.getItem("theme");
+      if (!stored) setTheme(e.matches ? "dark" : "light");
+    };
+
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const toggleTheme = () =>
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
 
   return (
     <>

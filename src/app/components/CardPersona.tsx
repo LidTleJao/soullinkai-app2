@@ -3,12 +3,8 @@
 
 import { useEffect, useState, useCallback } from "react";
 import useAuthGuard from "../hooks/useAuthGuard";
-import {
-  getPersonaById,
-  uploadImage,
-  saveJson,
-  Persona,
-} from "../services/personaService";
+import { getPersonaById, Persona } from "../services/personaService";
+import { savePersonaJson, uploadPersonaImage } from "../services/fileService";
 import FileUploader from "../components/FileUploader";
 import JsonEditor from "../components/JsonEditor";
 
@@ -33,12 +29,12 @@ const CardPersona = ({ id }: { id: string }) => {
   }, [load]);
 
   const sendImage = async (f: File) => {
-    await uploadImage(String(id), f);
+    await uploadPersonaImage(String(id), f);
     await load(); // ✅ อัปเดตใหม่ เพื่อรับ imageUrl ล่าสุด
   };
 
   const save = async (s: string) => {
-    await saveJson(String(id), s, "personality");
+    await savePersonaJson(String(id), s, "personality");
     // จะ toast ตรงนี้ก็ได้
   };
 
@@ -47,9 +43,12 @@ const CardPersona = ({ id }: { id: string }) => {
 
   return (
     <>
-      <div className="min-h-screen bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Flogin.jpg?alt=media&token=22362023-f57d-4066-b91d-209b63c9880e)] bg-cover bg-center font-[family-name:var(--font-el-messiri)]">
+      <div 
+      // className="min-h-screen bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2Flogin.jpg?alt=media&token=22362023-f57d-4066-b91d-209b63c9880e)] bg-cover bg-center font-[family-name:var(--font-el-messiri)]"
+      className="min-h-screen p-4 text-base-content bg-base-100 bg-cover bg-center font-[family-name:var(--font-el-messiri)]"
+      >
         <div className="grid md:grid-cols-2 gap-6 no-caret">
-          <div className="bg-white/5 border border-white/10 p-4 rounded-xl">
+          <div className="card border-2 border-green-300 p-4 rounded-xl">
             <h2 className="font-semibold mb-3">Picture</h2>
 
             {/* ✅ แสดงรูปถ้ามี */}
@@ -59,10 +58,10 @@ const CardPersona = ({ id }: { id: string }) => {
                 alt={persona.name}
                 width={200}
                 height={200}
-                className="w-48 h-48 object-cover rounded mb-3 border border-white/10"
+                className="w-30 h-30 object-cover rounded mb-3 border-2 border-amber-100"
               />
             ) : (
-              <div className="w-48 h-48 rounded mb-3 bg-white/10 flex items-center justify-center text-white/60">
+              <div className="w-48 h-48 rounded mb-3 border-2 border-amber-100 flex items-center justify-center ">
                 No image
               </div>
             )}
@@ -70,7 +69,7 @@ const CardPersona = ({ id }: { id: string }) => {
             <FileUploader onUpload={sendImage} />
           </div>
 
-          <div className="bg-white/5 border border-white/10 p-4 rounded-xl">
+          <div className="card border-2 border-blue-300 p-4 rounded-xl">
             <h2 className="font-semibold mb-2">Personality JSON</h2>
             <JsonEditor onSave={save} />
           </div>

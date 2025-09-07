@@ -58,11 +58,10 @@ export default function CardAdminDashboard() {
 
   return (
     <div
-      className="min-h-screen w-full p-6 space-y-8 bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FadminDB.jpg?alt=media&token=f83560b4-9acf-43f5-85dc-7925c3e71fce)] bg-cover bg-center"
-      // สีคงที่ (ไม่อิงธีม)
-      style={{ backgroundColor: "#0B0D10", color: "#EAF2FF" }}
+      // className="min-h-screen w-full p-6 space-y-8 bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FadminDB.jpg?alt=media&token=f83560b4-9acf-43f5-85dc-7925c3e71fce)] bg-cover bg-center"
+      className="min-h-screen w-full p-6 space-y-8 bg-base-100 font-[family-name:var(--font-el-messiri)]"
     >
-      <h1 className="text-2xl lg:text-4xl font-bold no-caret">Admin Dashboard</h1>
+      <h1 className="text-2xl lg:text-4xl font-bold no-caret text-base-content ">Admin Dashboard</h1>
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

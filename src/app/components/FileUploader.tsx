@@ -82,7 +82,7 @@ export default function FileUploader({ onUpload, maxSizeMB = 8 }: Props) {
       <input
         id="file-input"
         type="file"
-        className="file-input text-sm"
+        className="file-input text-sm file-input-info text-base-content"
         accept="image/*"
         onChange={pick}
         disabled={loading}
@@ -94,18 +94,19 @@ export default function FileUploader({ onUpload, maxSizeMB = 8 }: Props) {
           alt="Preview"
           width={160}
           height={160}
-          className="w-40 h-40 object-cover rounded border bg-white border-gray-300"
+          className="w-30 h-30 object-cover rounded border-2 bg-white border-amber-100"
         />
       )}
 
       <button
-        disabled={loading || !file}
+        aria-disabled={loading || !file}
         onClick={go}
-        className={`btn px-3 py-1 rounded no-caret border-0 text-white ${
+        className={`btn btn-neutral px-3 py-1 rounded no-caret border-0 text-white ${
           loading || !file
-            ? "bg-blue-500/60 cursor-not-allowed"
-            : "bg-blue-500 hover:bg-blue-600"
+            ? "bg-blue-300 cursor-not-allowed"
+            : "bg-blue-300 hover:bg-blue-500"
         }`}
+        
       >
         {loading ? "Uploading..." : "Upload"}
       </button>

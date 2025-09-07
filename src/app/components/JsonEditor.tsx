@@ -1,20 +1,3 @@
-// "use client";
-// import { useState } from "react";
-
-// export default function JsonEditor({initial="",onSave}:{initial?:string; onSave:(s:string)=>Promise<void>}){
-//   const [text,setText]=useState(initial);
-//   const [saving,setSaving]=useState(false);
-//   const save=async()=>{ try{ JSON.parse(text); }catch{ if(!confirm("JSON not valid. Save raw text?")) return; }
-//     setSaving(true); await onSave(text); setSaving(false);
-//   };
-//   return (
-//     <div>
-//       <textarea value={text} onChange={e=>setText(e.target.value)} className="w-full h-72 bg-black/40 border border-white/10 rounded p-3 font-mono text-sm" placeholder='{"name":"..."}' />
-//       <button onClick={save} disabled={saving} className="mt-2 bg-emerald-600 px-3 py-1 rounded">{saving?"Saving...":"Save JSON"}</button>
-//     </div>
-//   );
-// }
-
 "use client";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -87,21 +70,21 @@ export default function JsonEditor({
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="w-full h-72 bg-black/40 border border-white/10 rounded p-3 font-mono text-sm"
+        className="w-full h-72 bg-white border-green-300 border-2 rounded-xl p-3 font-mono text-sm"
         placeholder='{"name":"..."}'
       />
       <div className="mt-2 flex gap-2">
         <button
           onClick={pretty}
           disabled={saving}
-          className="btn border-0 text-white bg-gray-600 px-3 py-1 rounded"
+          className="btn btn-neutral border-0 text-white bg-gray-500 hover:bg-gray-700 px-3 py-1 rounded"
         >
           Pretty JSON
         </button>
         <button
           onClick={save}
           disabled={saving}
-          className="btn border-0 text-white bg-emerald-600 px-3 py-1 rounded"
+          className="btn btn-neutral border-0 text-white bg-green-300 hover:bg-green-500 px-3 py-1 rounded"
         >
           {saving ? "Saving..." : "Save JSON"}
         </button>

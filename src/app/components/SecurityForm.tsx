@@ -30,18 +30,6 @@ export default function SecurityForm() {
       } else {
         toast.error("OTP ไม่ถูกต้องหรือหมดอายุ", { position: "top-right" });
       }
-
-      // DEV-ONLY: แสดง OTP ด้วย toast (โปรดปิดใน production)
-      // if (r?.otp) {
-      //   toast.info(`OTP (dev only): ${r.otp}`, {
-      //     position: "top-right",
-      //     autoClose: 5000,
-      //   });
-      // } else {
-      //   toast.success("ส่ง OTP แล้ว โปรดตรวจอีเมล/เบอร์โทรของคุณ", {
-      //     position: "top-right",
-      //   });
-      // }
     } catch (err) {
       console.error("requestOtp failed:", err);
       toast.error("ขอ OTP ไม่สำเร็จ ลองใหม่อีกครั้ง", {
@@ -100,19 +88,22 @@ export default function SecurityForm() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FadminDB.jpg?alt=media&token=f83560b4-9acf-43f5-85dc-7925c3e71fce)] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]">
-      <div className="flex flex-col items-center space-y-8 mb-10 no-caret w-full max-w-3xl">
-        <h1 className="text-2xl lg:text-6xl font-bold">Security</h1>
+    <div 
+    // className="min-h-screen flex flex-col bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FadminDB.jpg?alt=media&token=f83560b4-9acf-43f5-85dc-7925c3e71fce)] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
+    className="min-h-screen flex flex-col bg-base-100 items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
+    >
+      <div className="flex flex-col items-center space-y-8 mb-10 w-full max-w-3xl">
+        <h1 className="text-2xl lg:text-6xl font-bold text-base-content no-caret">Security</h1>
 
         {/* OTP Section */}
-        <div className="bg-black/50 p-4 rounded-xl border border-white/10 ">
-          <div className="font-semibold mb-2">One-Time Password</div>
+        <div className="p-4 rounded-xl border-2 border-blue-300 ">
+          <div className="font-semibold mb-2 text-base-content">One-Time Password</div>
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={req}
               disabled={loadingReq}
-              className={`btn border-0 text-white px-3 py-1 rounded ${
-                loadingReq ? "bg-blue-600/60 cursor-not-allowed" : "bg-blue-600"
+              className={`btn btn-neutral border-0 text-white px-3 py-1 rounded ${
+                loadingReq ? "bg-blue-300/60 cursor-not-allowed" : "bg-blue-300 hover:bg-blue-500"
               }`}
             >
               {loadingReq ? "Requesting..." : "Request OTP"}
@@ -121,32 +112,32 @@ export default function SecurityForm() {
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               placeholder="Enter OTP"
-              className="px-2 py-1 bg-black/40 border border-white/20 rounded"
+              className="input px-2 py-1 bg-white border-2 border-green-300 rounded max-w-max text-black"
             />
             <button
               onClick={ver}
               disabled={loadingVer}
-              className={`btn border-0 text-white px-3 py-1 rounded ${
+              className={`btn btn-neutral border-0 text-white px-3 py-1 rounded ${
                 loadingVer
-                  ? "bg-emerald-600/60 cursor-not-allowed"
-                  : "bg-emerald-600"
+                  ? "bg-green-300/60 cursor-not-allowed"
+                  : "bg-green-300 hover:bg-green-500"
               }`}
             >
               {loadingVer ? "Verifying..." : "Verify"}
             </button>
           </div>
-          <p className="text-xs text-white/70 mt-5">
+          <p className="text-xs text-base-content mt-5 font-[family-name:var(--font-noto-sans-thai)]">
             * โปรดเปลี่ยนเป็นส่ง OTP ทาง Email/SMS ใน production
           </p>
         </div>
 
         {/* Security Questions */}
-        <div className="bg-black/50 p-4 rounded-xl border border-white/10">
-          <div className="font-semibold">Security Questions</div>
+        <div className="p-4 rounded-xl border-2 border-green-300">
+          <div className="font-semibold text-base-content">Security Questions</div>
           {qs.map((q, i) => (
             <div key={i} className="flex flex-col md:flex-row gap-2 mt-2">
               <input
-                className="flex-1 px-2 py-1 bg-black/40 border border-white/20 rounded"
+                className="flex-1 px-2 py-1 bg-white border-2 border-blue-300 rounded text-black"
                 placeholder="Question"
                 value={q.question}
                 onChange={(e) => {
@@ -156,7 +147,7 @@ export default function SecurityForm() {
                 }}
               />
               <input
-                className="flex-1 px-2 py-1 bg-black/40 border border-white/20 rounded"
+                className="flex-1 px-2 py-1 bg-white border-2 border-blue-300 rounded text-black"
                 placeholder="Answer"
                 value={q.answer}
                 onChange={(e) => {
@@ -170,17 +161,17 @@ export default function SecurityForm() {
           <div className="mt-3 flex gap-2">
             <button
               onClick={add}
-              className="btn border-0 text-white bg-white/10 px-3 py-1 rounded"
+              className="btn btn-neutral border-0 text-black bg-white px-3 py-1 rounded"
             >
               Add
             </button>
             <button
               onClick={save}
               disabled={loadingSave}
-              className={`btn border-0 text-white px-3 py-1 rounded ${
+              className={`btn btn-neutral border-0 text-black px-3 py-1 rounded ${
                 loadingSave
-                  ? "bg-purple-600/60 cursor-not-allowed"
-                  : "bg-purple-600"
+                  ? "bg-purple-300/60 cursor-not-allowed"
+                  : "bg-purple-300 hover:bg-purple-500"
               }`}
             >
               {loadingSave ? "Saving..." : "Save"}

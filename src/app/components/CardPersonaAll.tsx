@@ -77,40 +77,49 @@ const CardPersonaAll = () => {
 
   return (
     <>
-      <div 
-      // className="min-h-screen flex flex-col bg-[url('/Image/personaAll.jpg')] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
-      className="min-h-screen flex flex-col bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FpersonaAll.jpg?alt=media&token=4fa3c745-4d04-4eef-b8fe-7c71a6dc7afb)] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
+      <div
+        // className="min-h-screen flex flex-col bg-[url('/Image/personaAll.jpg')] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
+        // className="min-h-screen flex flex-col bg-[url(https://firebasestorage.googleapis.com/v0/b/website-soullinkai-563d7.firebasestorage.app/o/Image%2FpersonaAll.jpg?alt=media&token=4fa3c745-4d04-4eef-b8fe-7c71a6dc7afb)] bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
+        className="min-h-screen flex flex-col bg-base-100 bg-cover bg-center items-center justify-center p-4 font-[family-name:var(--font-el-messiri)]"
       >
         <div className="flex flex-col items-center space-y-8 mb-10 no-caret">
-          <h1 className="text-2xl lg:text-6xl font-bold">Your Personas</h1>
+          <h1 className="text-2xl lg:text-6xl font-bold text-base-content">
+            Your Personas
+          </h1>
           <Link
             href="/PersonaCreate"
-            className="bg-white text-black px-4 py-1 rounded-full"
+            className="btn btn-neutral bg-white text-black px-4 py-1 rounded-full border-0 border-amber-50"
           >
             Create new
           </Link>
         </div>
 
-        <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 space-y-6 lg:space-y-0 items-center bg-white/5 border border-white/10 rounded-xl p-4 mb-6">
-          <div className="font-semibold no-caret">Quick create</div>
+        <div
+          // className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 space-y-6 lg:space-y-0 items-center bg-white/5 border border-white/10 rounded-xl p-4 mb-6"
+          // className="flex flex-col lg:flex-row space-x-0 lg:space-x-8 space-y-6 lg:space-y-0 items-center border-2 border-blue-300 rounded-xl p-4 mb-6"
+          className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr_auto] gap-4 items-center border-2 border-blue-300 rounded-xl p-4 mb-6 w-full max-w-fit"
+        >
+          <div className="font-semibold no-caret text-base-content">
+            Quick create
+          </div>
           <input
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mr-2 px-2 py-1 bg-black/40 border border-white/20 rounded"
+            className="input mr-2 px-2 py-1 text-black border-2 bg-white border-green-300 rounded"
           />
           <input
             placeholder="Description"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
-            className="mr-2 px-2 py-1 bg-black/40 border border-white/20 rounded"
+            className="input mr-2 px-2 py-1 text-black border-2 bg-white border-green-300 rounded"
           />
-          <button onClick={add} className="bg-emerald-600 px-3 py-1 rounded">
+          <button onClick={add} className="btn btn-neutral bg-green-300 hover:bg-green-500 text-white border-0 px-3 py-1 rounded">
             Create
           </button>
         </div>
 
-        {loading && <div className="opacity-70">Loading personas…</div>}
+        {loading && <div className="opacity-70 text-base-content">Loading personas…</div>}
         {errMsg && (
           <div className="bg-red-500/10 text-red-300 border border-red-500/30 p-3 rounded mb-4">
             {errMsg}

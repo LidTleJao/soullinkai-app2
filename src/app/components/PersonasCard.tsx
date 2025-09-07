@@ -42,7 +42,7 @@ export default function PersonasCard({ persona, onChange }: PersonaCardProps) {
 
   return (
     <>
-      <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+      <div className="card border-2 border-amber-100 rounded-xl p-4">
         <div className="flex gap-3">
           {/* <div className="w-16 h-16 bg-white/10 rounded-full shrink-0" /> */}
           {persona.imageUrl ? (
@@ -54,32 +54,33 @@ export default function PersonasCard({ persona, onChange }: PersonaCardProps) {
               className="w-16 h-16 bg-white/10 rounded-full shrink-0"
             />
           ) : (
-            <div className="w-16 h-16 flex items-center justify-center text-xs text-white/60">
+            <div className="w-16 h-16 flex items-center justify-center text-xs text-base-content">
               No image
             </div>
           )}
           <div className="flex-1">
-            <div className="font-semibold">{persona.name}</div>
-            <div className="text-white/70 text-sm">
+            <div className="font-semibold text-base-content">{persona.name}</div>
+            <div className="text-base-content text-sm">
               {persona.description || "—"}
             </div>
             <div className="mt-2 flex gap-2">
               <button
-                onClick={() => router.push(`/Persona/${persona.id}`)}
-                className="btn  bg-emerald-500 text-white border-0 px-3 py-1 rounded"
+                // onClick={() => router.push(`/Persona/${persona.id}`)}
+                onClick={() => router.push(`/Persona?id=${persona.id}`)}
+                className="btn btn-neutral bg-green-300 hover:bg-green-500 text-white border-0 px-3 py-1 rounded"
               >
                 Edit
               </button>
               <button
                 onClick={() => router.push(`/Update?Persona=${persona.id}`)}
-                className="btn bg-indigo-500 text-white border-0 px-3 py-1 rounded"
+                className="btn btn-neutral bg-blue-300 hover:bg-blue-500 text-white border-0 px-3 py-1 rounded"
               >
                 Update JSON
               </button>
               <button
                 // onClick={del}
                 onClick={() => handleOpenModalDeletePersona(persona.id)}
-                className="btn bg-red-500 text-white border-0 px-3 py-1 rounded"
+                className="btn btn-neutral bg-red-500 text-white border-0 px-3 py-1 rounded"
               >
                 Delete
               </button>
